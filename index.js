@@ -44,7 +44,25 @@ function addToCartClicked(event) {
     let title = shopItem.getElementsByClassName('shop-item-title')[0].innerText;
     let price = shopItem.getElementsByClassName('shop-item-price')[0].innerText;
     let imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src;
-    
+    addItemToCart(title, price, imageSrc);
+}
+
+function addItemToCart(title, price, imageSrc) {
+    let cartRow = document.createElement("div");
+    cartRow.classList.add("cart-row");
+    let cartItems = document.getElementsByClassName("cart-items")[0];
+    let cartRowContents = `
+    <div class="cart-item cart-column">
+        <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
+        <span class="cart-item-title">${title}</span>
+    </div>
+    <span class="cart-price cart-column">${price}</span>
+    <div class="cart-quantity cart-column">
+        <input class="cart-quantity-input" type="number" value="1">
+        <button class="btn btn-danger" type="button">REMOVE</button>
+    </div>`
+    cartRow.innerHTML = cartRowContents;
+    cartItems.append(cartRow);
 }
 
 function updateTotal() {
