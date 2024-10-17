@@ -10,11 +10,25 @@ let removeCartItemButtons = document.getElementsByClassName("btn-danger");
         let button = removeCartItemButtons[i];
         button.addEventListener("click", removeCartItem);
     }
+
+    let quantityInputs = document.getElementsByClassName("cart-quantity-input")
+    for (let i = 0; i <quantityInputs.length; i++) {
+        let input = quantityInputs[i];
+        input.addEventListener("change", quantityChanged)
+    }
 }
 
 function removeCartItem(event) {
     let buttonClicked = event.target;
     buttonClicked.parentElement.parentElement.remove();
+    updateTotal();
+}
+
+function quantityChanged(event) {
+    let input = event.target;
+    if (isNaN(input.value) || input.value <= 0) {
+        input.value = 1;
+    }
     updateTotal();
 }
 
